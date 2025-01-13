@@ -1,10 +1,12 @@
 app-id: net.zdechov.app.Tunneler
 runtime: org.kde.Platform
-runtime-version: '5.15-23.08'
+runtime-version: '5.15-24.08'
 sdk: org.kde.Sdk
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.freepascal
 command: Tunneler
+rename-icon: Tunneler
+rename-desktop-file: Tunneler.desktop
 finish-args:
   - --share=ipc
   - --socket=fallback-x11
@@ -25,17 +27,16 @@ modules:
     sources:
       - type: svn
         url: https://svn.zdechov.net/Tunneler/tags/1.1.1
-        revision: r104
+        revision: r113
     buildsystem: simple
     build-commands:
       - |
         . /usr/lib/sdk/freepascal/enable.sh
         lazbuild --build-mode=Release --ws=qt5 tunneler.lpi
-      - install -Dm755 Tunneler -t $FLATPAK_DEST/share/Tunneler
-      - install -d $FLATPAK_DEST/bin
-      - ln -s $FLATPAK_DEST/share/Tunneler/Tunneler $FLATPAK_DEST/bin/Tunneler
-      - install -Dm644 Install/flatpak/${FLATPAK_ID}.desktop -t $FLATPAK_DEST/share/applications
-      - install -Dm644 Images/256x256/Tunneler.png $FLATPAK_DEST/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
+      - install -Dm755 Tunneler -t $FLATPAK_DEST/bin
+      - install -Dm644 Install/common/Tunneler.desktop -t $FLATPAK_DEST/share/applications
+      - install -Dm644 Images/256x256/Tunneler.png -t $FLATPAK_DEST/share/icons/hicolor/256x256/apps
       - install -Dm644 Languages/*.po -t $FLATPAK_DEST/share/Tunneler/Languages
+      - install -Dm644 Packages/Common/Languages/*.po -t $FLATPAK_DEST/share/Tunneler/Languages
       - install -Dm644 Audio/*.wav -t $FLATPAK_DEST/share/Tunneler/Audio
-      - install -Dm644 Install/flatpak/${FLATPAK_ID}.appdata.xml $FLATPAK_DEST/share/metainfo/${FLATPAK_ID}.metainfo.xml
+      - install -Dm644 Install/flatpak/${FLATPAK_ID}.metainfo.xml -t $FLATPAK_DEST/share/metainfo
