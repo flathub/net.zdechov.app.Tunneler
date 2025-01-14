@@ -27,7 +27,7 @@ modules:
     sources:
       - type: svn
         url: https://svn.zdechov.net/Tunneler/tags/1.1.1
-        revision: r113
+        revision: r116
     buildsystem: simple
     build-commands:
       - |
